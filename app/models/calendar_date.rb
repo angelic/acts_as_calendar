@@ -5,11 +5,10 @@ class CalendarDate < ActiveRecord::Base
   has_and_belongs_to_many(:occurrences,
     {:class_name=>'CalendarEvent', :join_table=>'calendar_occurrences'})
 
+  has_many :calendar_event_dates
+
   # actual events, including occurrences and recurrences
-  # FIXME - can't flag this collection readonly, maybe it could be disabled
-  # by overriding create, <<, et. al.?
-  has_and_belongs_to_many(:events,
-    {:class_name=>'CalendarEvent', :join_table=>'calendar_event_dates'})
+  has_many :events, :through => :calendar_event_dates, :readonly => true
 
   validates_presence_of :calendar
   validates_presence_of :value
