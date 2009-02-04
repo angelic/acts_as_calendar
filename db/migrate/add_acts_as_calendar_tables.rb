@@ -1,4 +1,4 @@
-class AddCalendarTables < ActiveRecord::Migration
+class AddActsAsCalendarTables < ActiveRecord::Migration
   def self.up
     create_table :calendars do |t|
     end
