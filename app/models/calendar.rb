@@ -17,8 +17,8 @@ class Calendar < ActiveRecord::Base
       dates = Calendar.parse(*args)
       event = create
       case dates
-        when Date: event.occurrences << event.calendar.dates.find_by_value(dates)
-        when Hash: event.recurrences.create(dates)
+        when Date then event.occurrences << event.calendar.dates.find_by_value(dates)
+        when Hash then event.recurrences.create(dates)
         when Enumerable
           dates.each do |date|
             event.occurrences << event.calendar.dates.find_by_value(date)
@@ -32,9 +32,9 @@ class Calendar < ActiveRecord::Base
     def find_by_dates(*args)
       dates = Calendar.parse(*args)
       conditions = case dates
-        when Date: ['value = ?', dates]
-        when Range: ['value BETWEEN ? AND ?', dates.first, dates.last]
-        when Enumerable: ['value IN (?)', dates]
+        when Date then ['value = ?', dates]
+        when Range then ['value BETWEEN ? AND ?', dates.first, dates.last]
+        when Enumerable then ['value IN (?)', dates]
         else
           raise ArgumentError
       end

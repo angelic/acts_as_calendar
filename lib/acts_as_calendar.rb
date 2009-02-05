@@ -6,10 +6,10 @@ module ActsAsCalendar
     raise ArgumentError unless args.length > 0
     if args.length == 1
       case args[0]
-        when String: parse_dates(args[0])
-        when Date: args[0]
-        when Time: args[0]
-        when Enumerable: args[0].map {|arg| parse(arg)}
+        when String then parse_dates(args[0])
+        when Date then args[0]
+        when Time then args[0]
+        when Enumerable then args[0].map {|arg| parse(arg)}
         else raise ArgumentError, args[0].class.to_s
       end
     elsif args.length == 2
@@ -86,15 +86,15 @@ module ActsAsCalendar
   # to convert, it will raise an ArgumentError.
   def monthweek(value)
     case value.downcase
-      when 'last': -1
-      when '1st': 0
-      when 'first': 0
-      when '2nd': 1
-      when 'second': 1
-      when '3rd': 2
-      when 'third': 2
-      when '4th': 3
-      when 'fourth': 3
+      when 'last' then -1
+      when '1st' then 0
+      when 'first' then 0
+      when '2nd' then 1
+      when 'second' then 1
+      when '3rd' then 2
+      when 'third' then 2
+      when '4th' then 3
+      when 'fourth' then 3
       else raise ArgumentError, value
     end
   end
